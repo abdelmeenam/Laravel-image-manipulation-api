@@ -21,8 +21,8 @@ return new class extends Migration
             $table->text('data');
             $table->string('output_path', 2000)->nullable();
             $table->timestamp('created_at')->nullable();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('album_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('album_id')->nullable()->constrained();
         });
     }
 
