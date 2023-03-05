@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Album;
 use App\Models\ImageManipulation;
 use App\Http\Requests\ResizeImageRequest;
+use GuzzleHttp\Psr7\UploadedFile;
 
 class ImageManipulationController extends Controller
 {
@@ -35,7 +36,28 @@ class ImageManipulationController extends Controller
      */
     public function resize(ResizeImageRequest $request)
     {
-        //
+        $all = $request->all();
+
+        /** @var UploadedFile|string $image */
+        $image = $all['image'];
+        unset($all['image']);
+        $data =[
+          'type' => ImageManipulation::TYPE_RESIZE ,
+          'data' => json_encode($all),
+          'user_id' => null,
+        ];
+
+        if ( isset($all['album_id'])){
+            //TODO AND AUTH
+
+            $data['album_id'] = $all['album_id'];
+        }
+
+        if ($image instanceof  UploadedFile){
+        }else{
+        }
+
+
     }
 
     /**
